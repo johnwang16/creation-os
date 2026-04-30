@@ -76,7 +76,7 @@
 set -euo pipefail
 
 # -------------------- config --------------------
-REPO_URL="${COS_REPO_URL:-https://github.com/spektre-labs/creation-os.git}"
+REPO_URL="${COS_REPO_URL:-https://github.com/johnwang16/creation-os.git}"
 INSTALL_DIR="${COS_HOME:-$HOME/.creation-os}"
 BRANCH="${COS_BRANCH:-main}"
 BIN_DIR="${COS_BIN_DIR:-/usr/local/bin}"
