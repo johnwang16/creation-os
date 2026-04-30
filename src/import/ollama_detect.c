@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 int cos_tcp_probe_ipv4(const char *host, uint16_t port, int timeout_ms)

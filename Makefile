@@ -10571,7 +10571,7 @@ cos: cli/cos.c src/cli/cos_voice.c src/import/ollama_detect.c include/cos_versio
 	    src/cli/cos_life.c \
 	    src/cache/response_cache.c \
 	    $(COS_OMEGA_SUPPORT_SRCS)
-	$(CC) -O2 -Wall -std=c11 $(COS_CLI_INC) $(LICENSE_KERNEL_INC) -Iinclude \
+	$(CC) $(CFLAGS) $(COS_CLI_INC) $(LICENSE_KERNEL_INC) -Iinclude \
 	    -Isrc/cli -Isrc/sigma -Isrc/sigma/tools -Isrc/sigma/pipeline -Isrc/vendor \
 	    -o cos cli/cos.c src/cli/cos_voice.c src/import/ollama_detect.c $(COS_CLI_SRCS) $(COS_THINK_CLI_AUX) \
 	    src/sigma/skill_distill.c src/sigma/knowledge_graph.c \
