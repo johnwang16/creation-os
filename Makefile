@@ -7002,10 +7002,10 @@ cos-benchmark: $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_benchmark.c \
 	    src/sigma/metrics/energy_metric.c src/cli/escalation.c \
 	    $(LDFLAGS) -lsqlite3 -lcurl
 
-cos-cost: $(COS_CLI_SRCS) src/cli/cos_cost.c src/cli/escalation.c
-	$(CC) $(CFLAGS) $(COS_CLI_INC) -o $@ \
-	    $(COS_CLI_SRCS) src/cli/cos_cost.c src/cli/escalation.c \
-	    $(LDFLAGS) -lcurl
+cos-cost: $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_cost.c src/cli/escalation.c
+	$(CC) $(CFLAGS) $(COS_CLI_INC) $(LICENSE_KERNEL_INC) -o $@ \
+	    $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_cost.c src/cli/escalation.c \
+	    $(LDFLAGS) -lsqlite3 -lcurl
 
 # HORIZON-2: digital twin preflight + guarded /bin/sh -c execution.
 cos-exec: src/sigma/twin/digital_twin.c src/cli/cos_exec.c
