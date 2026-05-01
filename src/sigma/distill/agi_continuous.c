@@ -122,7 +122,7 @@ int cos_agi_distill_emit_status(FILE *fp) {
 }
 
 int cos_agi_distill_self_test(void) {
-    char tmpl[] = "/tmp/cos_agi_distill_test_XXXXXX.jsonl";
+    char tmpl[] = "/tmp/cos_agi_distill_test_XXXXXX";
     int fd = mkstemp(tmpl);
     if (fd < 0) return -1;
     close(fd);
