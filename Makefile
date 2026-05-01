@@ -6298,7 +6298,7 @@ cos-chat: $(COS_CLI_SRCS) src/sigma/pipeline/engram_persist.c \
           src/sigma/speed_metrics.c \
           src/sigma/semantic_entropy.c \
           src/sigma/semantic_sigma.c src/sigma/adaptive_sampling.c \
-          $(COS_PROOF_LIB) src/cli/escalation.c src/import/ollama_detect.c \
+          src/cli/escalation.c src/import/ollama_detect.c \
           src/sigma/response_cache.c \
           src/sigma/cross_model_sigma.c \
           src/sigma/model_cascade.c \
@@ -6329,7 +6329,6 @@ cos-chat: $(COS_CLI_SRCS) src/sigma/pipeline/engram_persist.c \
 	    src/sigma/speed_metrics.c \
 	    src/sigma/semantic_entropy.c \
 	    src/sigma/semantic_sigma.c src/sigma/adaptive_sampling.c \
-	    $(COS_PROOF_LIB) \
 	    src/cli/escalation.c src/import/ollama_detect.c \
 	    src/sigma/response_cache.c \
 	    src/sigma/cross_model_sigma.c src/sigma/model_cascade.c \
@@ -6677,7 +6676,6 @@ check-green-score: creation_os_check_green_score
 
 # Ω-loop: speculative path + σ-mission + federation edge + unified driver
 COS_OMEGA_SUPPORT_SRCS = src/sigma/speculative_sigma.c $(COS_SPIKE_ADAPT_SRCS) \
-	$(COS_PROOF_LIB) \
 	src/sigma/mission.c src/sigma/coherence_watchdog.c \
 	src/sigma/perception.c src/sigma/pipeline/watchdog.c \
 	src/sigma/federation.c src/sigma/pipeline/a2a.c \
@@ -6706,7 +6704,6 @@ creation_os_check_omega: tests/agi/check_omega_loop_main.c $(COS_CLI_SRCS) \
 	    src/sigma/skill_distill.c src/sigma/knowledge_graph.c \
 	    src/sigma/world_model.c $(COS_EDGE_INF) src/cli/cos_think.c \
 	    src/sigma/speculative_sigma.c $(COS_SPIKE_ADAPT_SRCS) \
-	    $(COS_PROOF_LIB) \
 	    src/sigma/mission.c src/sigma/coherence_watchdog.c \
 	    src/sigma/perception.c src/sigma/pipeline/watchdog.c \
 	    src/sigma/federation.c src/sigma/pipeline/a2a.c \
@@ -6736,7 +6733,6 @@ cos-omega: $(COS_CLI_SRCS) $(COS_THINK_CLI_AUX) src/sigma/skill_distill.c \
 	    src/sigma/skill_distill.c src/sigma/knowledge_graph.c \
 	    src/sigma/world_model.c $(COS_EDGE_INF) src/cli/cos_think.c \
 	    src/sigma/speculative_sigma.c $(COS_SPIKE_ADAPT_SRCS) \
-	    $(COS_PROOF_LIB) \
 	    src/sigma/mission.c src/sigma/coherence_watchdog.c \
 	    src/sigma/perception.c src/sigma/pipeline/watchdog.c \
 	    src/sigma/federation.c src/sigma/pipeline/a2a.c \
@@ -8154,8 +8150,9 @@ cos-serve: $(COS_CLI_SRCS) src/sigma/pipeline/engram_persist.c \
          src/cli/escalation.c src/cli/cos_serve.c \
          src/cli/cos_verify_claims.c src/sigma/semantic_entropy.c \
          src/sigma/inference_cache.c \
+         src/cache/response_cache.c \
          src/vendor/picohttpparser.c src/sigma/audit_log.c
-	$(CC) $(CFLAGS) $(COS_CLI_INC) $(LICENSE_KERNEL_INC) -Iinclude -Isrc/vendor -Isrc/sigma \
+	$(CC) $(CFLAGS) $(COS_CLI_INC) -Iinclude -Isrc/vendor -Isrc/sigma \
 	    -DCOS_SERVE_MAIN -o $@ \
 	    $(COS_CLI_SRCS) src/sigma/pipeline/engram_persist.c \
 	    src/sigma/ttt/inplace_ttt.c \
@@ -8165,8 +8162,8 @@ cos-serve: $(COS_CLI_SRCS) src/sigma/pipeline/engram_persist.c \
 	    src/cli/escalation.c src/cli/cos_serve.c \
 	    src/cli/cos_verify_claims.c src/sigma/semantic_entropy.c \
 	    src/sigma/inference_cache.c \
+	    src/cache/response_cache.c \
 	    src/vendor/picohttpparser.c src/sigma/audit_log.c \
-	    $(COS_PROOF_LIB) \
 	    $(LDFLAGS) -lsqlite3 -lcurl
 
 check-cos-serve: cos-serve
