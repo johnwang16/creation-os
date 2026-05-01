@@ -7029,9 +7029,10 @@ check-long-horizon: cos-plan
 	@echo "check-long-horizon: OK (plan self-test + demo + rollback + cos plan forward)"
 
 # HORIZON-4: σ-swarm routing (argmin σ + trust EMA; mock peers in v0).
-cos-swarm: src/sigma/swarm/cos_swarm.c src/cli/cos_swarm_cli.c
-	$(CC) $(CFLAGS) -Isrc/sigma/swarm -o $@ \
-	    src/sigma/swarm/cos_swarm.c src/cli/cos_swarm_cli.c $(LDFLAGS)
+cos-swarm: src/sigma/swarm/cos_swarm.c src/sigma/swarm_coordinator.c src/sigma/stigmergy.c src/cli/cos_swarm_cli.c
+	$(CC) $(CFLAGS) -Isrc/sigma/swarm -Isrc/sigma -DCREATION_OS_ENABLE_SELF_TESTS -DCOS_SWARM_MAIN -o $@ \
+	    src/sigma/swarm/cos_swarm.c src/sigma/swarm_coordinator.c src/sigma/stigmergy.c src/cli/cos_swarm_cli.c \
+	    $(LDFLAGS) -lsqlite3 -lcurl
 
 check-swarm: cos-swarm
 	@bash benchmarks/sigma_pipeline/check_swarm.sh

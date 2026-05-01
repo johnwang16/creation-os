@@ -215,3 +215,7 @@ int cos_swarm_main(int argc, char **argv)
     usage(stderr);
     return 2;
 }
+
+#if defined(COS_SWARM_MAIN)
+int main(int argc, char **argv) { return cos_swarm_main(argc - 1, argv + 1); }
+#endif
