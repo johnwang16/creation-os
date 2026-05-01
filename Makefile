@@ -7092,6 +7092,7 @@ COS_AGENT_SRCS = src/sigma/pipeline/plan.c \
                  src/sigma/tools/sigma_tools.c \
                  src/sigma/channels.c \
                  src/sigma/engram_episodic.c \
+                 src/sigma/text_similarity.c \
                  src/sigma/error_attribution.c
 
 cos-agent: $(COS_AGENT_SRCS) src/cli/cos_agent.c
