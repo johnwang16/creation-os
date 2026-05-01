@@ -6995,12 +6995,12 @@ check-agi: check-state-ledger check-error-attribution check-engram-episodic \
 	check-text-similarity check-c2pa check-bitnet-native check-cos-serve check-voice check-omega check-neuro-symbolic
 	@echo "check-agi: OK (state ledger + error attribution + episodic memory + text_similarity + c2pa_sigma + bitnet_native + cos-serve + cos voice + Ω-loop + neuro-symbolic bridge)"
 
-cos-benchmark: $(COS_CLI_SRCS) src/cli/cos_benchmark.c \
+cos-benchmark: $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_benchmark.c \
                src/sigma/metrics/energy_metric.c src/cli/escalation.c
-	$(CC) $(CFLAGS) $(COS_CLI_INC) -Isrc/sigma/metrics -o $@ \
-	    $(COS_CLI_SRCS) src/cli/cos_benchmark.c \
+	$(CC) $(CFLAGS) $(COS_CLI_INC) $(LICENSE_KERNEL_INC) -Isrc/sigma/metrics -o $@ \
+	    $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_benchmark.c \
 	    src/sigma/metrics/energy_metric.c src/cli/escalation.c \
-	    $(LDFLAGS) -lcurl
+	    $(LDFLAGS) -lsqlite3 -lcurl
 
 cos-cost: $(COS_CLI_SRCS) src/cli/cos_cost.c src/cli/escalation.c
 	$(CC) $(CFLAGS) $(COS_CLI_INC) -o $@ \
