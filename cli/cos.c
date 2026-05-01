@@ -2797,6 +2797,17 @@ static int cmd_help_quick(const char *prog)
            C_BOLD, "cos think", C_RESET);
     printf("  %s%-28s%s  live telemetry dashboard\n",
            C_BOLD, "cos monitor", C_RESET);
+    printf("\n%sAGENTIC%s\n", C_BOLD, C_RESET);
+    printf("  %s%-28s%s  autonomous tool-calling agent (A6)\n",
+           C_BOLD, "cos agent", C_RESET);
+    printf("  %s%-28s%s  distributed mesh / federation (D6)\n",
+           C_BOLD, "cos network", C_RESET);
+    printf("  %s%-28s%s  T3-T6 formal evidence ledger (H4)\n",
+           C_BOLD, "cos formal", C_RESET);
+    printf("  %s%-28s%s  σ-gate arXiv paper generator (H5)\n",
+           C_BOLD, "cos paper", C_RESET);
+    printf("  %s%-28s%s  H6 JSON σ-meta summary\n",
+           C_BOLD, "cos sigma-meta", C_RESET);
     printf("\n%sMANAGE%s\n", C_BOLD, C_RESET);
     printf("  %s%-28s%s  inference cache stats\n",
            C_BOLD, "cos cache", C_RESET);
@@ -3542,7 +3553,12 @@ int main(int argc, char **argv)
     if (strcmp(argv[1], "network")   == 0) return cmd_network(argc - 2, argv + 2);
     if (strcmp(argv[1], "monitor")   == 0) return cos_monitor_main(argc, argv);
     if (strcmp(argv[1], "report")    == 0) return cos_report_main(argc, argv);
-    if (strcmp(argv[1], "omega")     == 0) return cos_omega_main(argc, argv);
+    if (strcmp(argv[1], "omega")     == 0) {
+        /* bare `cos omega` → sigma-omega status summary (S6 JSON);
+         * `cos omega --turns N` / any flag → full omega loop. */
+        if (argc <= 2) return exec_sibling("creation_os_sigma_omega", argc, argv);
+        return cos_omega_main(argc, argv);
+    }
     if (strcmp(argv[1], "self-report") == 0)
         return cmd_self_report(argc - 2, argv + 2);
     if (strcmp(argv[1], "selfplay")   == 0) return cmd_selfplay(argc - 2, argv + 2);
