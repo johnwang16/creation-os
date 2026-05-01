@@ -6235,7 +6235,7 @@ check-integration: test_sigma_pipeline_integration
 # quantitatively visible.
 COS_CLI_INC  = -Isrc/sigma/pipeline -Isrc/sigma/ttt -Isrc/cli -Isrc/import \
                -Isrc/sigma/metacog -Isrc/sigma/physics -Isrc/sigma -Isrc/omega \
-               -Isrc/bridge -Isrc/codex -Isrc
+               -Isrc/bridge -Isrc/codex -Isrc $(LICENSE_KERNEL_INC)
 COS_CLI_SRCS = src/sigma/pipeline/pipeline.c \
                src/sigma/pipeline/codex.c \
                src/sigma/pipeline/engram.c \
@@ -6254,7 +6254,8 @@ COS_CLI_SRCS = src/sigma/pipeline/pipeline.c \
                src/import/bitnet_spawn.c \
                src/import/bitnet_sigma.c \
                src/bridge/neural_symbolic.c \
-               src/codex/codex_smt.c
+               src/codex/codex_smt.c \
+               $(COS_PROOF_LIB)
 
 COS_EDGE_INF = src/sigma/inference_cache.c
 COS_SPIKE_ADAPT_SRCS = src/sigma/spike_engine.c src/sigma/adaptive_compute.c
@@ -6995,16 +6996,16 @@ check-agi: check-state-ledger check-error-attribution check-engram-episodic \
 	check-text-similarity check-c2pa check-bitnet-native check-cos-serve check-voice check-omega check-neuro-symbolic
 	@echo "check-agi: OK (state ledger + error attribution + episodic memory + text_similarity + c2pa_sigma + bitnet_native + cos-serve + cos voice + Ω-loop + neuro-symbolic bridge)"
 
-cos-benchmark: $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_benchmark.c \
+cos-benchmark: $(COS_CLI_SRCS) src/cli/cos_benchmark.c \
                src/sigma/metrics/energy_metric.c src/cli/escalation.c
-	$(CC) $(CFLAGS) $(COS_CLI_INC) $(LICENSE_KERNEL_INC) -Isrc/sigma/metrics -o $@ \
-	    $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_benchmark.c \
+	$(CC) $(CFLAGS) $(COS_CLI_INC) -Isrc/sigma/metrics -o $@ \
+	    $(COS_CLI_SRCS) src/cli/cos_benchmark.c \
 	    src/sigma/metrics/energy_metric.c src/cli/escalation.c \
 	    $(LDFLAGS) -lsqlite3 -lcurl
 
-cos-cost: $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_cost.c src/cli/escalation.c
-	$(CC) $(CFLAGS) $(COS_CLI_INC) $(LICENSE_KERNEL_INC) -o $@ \
-	    $(COS_CLI_SRCS) $(COS_PROOF_LIB) src/cli/cos_cost.c src/cli/escalation.c \
+cos-cost: $(COS_CLI_SRCS) src/cli/cos_cost.c src/cli/escalation.c
+	$(CC) $(CFLAGS) $(COS_CLI_INC) -o $@ \
+	    $(COS_CLI_SRCS) src/cli/cos_cost.c src/cli/escalation.c \
 	    $(LDFLAGS) -lsqlite3 -lcurl
 
 # HORIZON-2: digital twin preflight + guarded /bin/sh -c execution.
@@ -10571,7 +10572,7 @@ cos: cli/cos.c src/cli/cos_voice.c src/import/ollama_detect.c include/cos_versio
 	    src/cli/cos_life.c \
 	    src/cache/response_cache.c \
 	    $(COS_OMEGA_SUPPORT_SRCS)
-	$(CC) $(CFLAGS) $(COS_CLI_INC) $(LICENSE_KERNEL_INC) -Iinclude \
+	$(CC) $(CFLAGS) $(COS_CLI_INC) -Iinclude \
 	    -Isrc/cli -Isrc/sigma -Isrc/sigma/tools -Isrc/sigma/pipeline -Isrc/vendor \
 	    -o cos cli/cos.c src/cli/cos_voice.c src/import/ollama_detect.c $(COS_CLI_SRCS) $(COS_THINK_CLI_AUX) \
 	    src/sigma/skill_distill.c src/sigma/knowledge_graph.c \
@@ -10590,7 +10591,6 @@ cos: cli/cos.c src/cli/cos_voice.c src/import/ollama_detect.c include/cos_versio
 	    src/cli/cos_life.c \
 	    src/cache/response_cache.c \
 	    src/sigma/speculative_sigma.c $(COS_SPIKE_ADAPT_SRCS) \
-	    $(COS_PROOF_LIB) \
 	    src/cli/cos_serve.c src/vendor/picohttpparser.c src/sigma/audit_log.c \
 	    src/sigma/mission.c src/sigma/coherence_watchdog.c \
 	    src/sigma/perception.c src/sigma/pipeline/watchdog.c \
