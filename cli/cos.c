@@ -2815,6 +2815,15 @@ static int cmd_help_quick(const char *prog)
            C_BOLD, "cos skills", C_RESET);
     printf("  %s%-28s%s  knowledge graph\n",
            C_BOLD, "cos graph", C_RESET);
+    printf("\n%sINTEGRATION%s\n", C_BOLD, C_RESET);
+    printf("  %-30s  MCP tool server (stdio JSON-RPC)\n", "mcp");
+    printf("  %-30s  agent-to-agent protocol bridge\n", "a2a");
+    printf("  %-30s  multi-agent team coordination\n", "team");
+    printf("  %-30s  LoRA fine-tuning management\n", "lora");
+    printf("  %-30s  voice input / TTS pipeline\n", "voice");
+    printf("  %-30s  offline corpus ingest + retrieval\n", "offline");
+    printf("  %-30s  pipeline watchdog / health guard\n", "watchdog");
+    printf("  %-30s  corpus index management\n", "index");
     printf("\n%sFULL HELP%s\n", C_BOLD, C_RESET);
     printf("  %s%-28s%s  every command\n",
            C_BOLD, "cos help --all", C_RESET);
